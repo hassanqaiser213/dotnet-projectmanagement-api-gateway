@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Ocelot.Authorization;
@@ -25,11 +24,11 @@ public class Program
                 options.Authority = "https://afrozeprojectmanagement.us.auth0.com/";
                 options.Audience = "company";
             });
-        
+
         builder.Services
             .AddOcelot()
             .AddConsul();
-        
+
         builder.Services.CustomizeOcelot();
 
         WebApplication app = builder.Build();
@@ -38,8 +37,6 @@ public class Program
 
         app.Run();
     }
-
-    
 }
 
 // Github Issue: https://github.com/ThreeMammals/Ocelot/issues/913

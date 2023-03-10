@@ -8,14 +8,14 @@ namespace ProjectManagement.ApiGateway;
 public class DelimitedScopesAuthorizer : IScopesAuthorizer
 {
     private readonly IClaimsParser _claimsParser;
-    private readonly string _scope = "scope";
     private readonly string _msScope = "http://schemas.microsoft.com/identity/claims/scope";
-    
+    private readonly string _scope = "scope";
+
     public DelimitedScopesAuthorizer(IClaimsParser claimsParser)
     {
         _claimsParser = claimsParser;
     }
-    
+
     public Response<bool> Authorize(ClaimsPrincipal claimsPrincipal, List<string> routeAllowedScopes)
     {
         if (routeAllowedScopes == null || routeAllowedScopes.Count == 0)
@@ -23,7 +23,8 @@ public class DelimitedScopesAuthorizer : IScopesAuthorizer
             return new OkResponse<bool>(true);
         }
 
-        var values = _claimsParser.GetValuesByClaimType(claimsPrincipal.Claims, _msScope);
+        Response<List<string>>? values = _claimsParser.GetValuesByClaimType(claimsPrincipal.Claims, _msScope);
+
         if (!values.IsError && !values.Data.Any())
         {
             values = _claimsParser.GetValuesByClaimType(claimsPrincipal.Claims, _scope);
@@ -34,12 +35,13 @@ public class DelimitedScopesAuthorizer : IScopesAuthorizer
             return new ErrorResponse<bool>(values.Errors);
         }
 
-        List<string> userScopes = new List<string>();
-        foreach (var item in values.Data)
+        List<string> userScopes = new ();
+
+        foreach (string? item in values.Data)
         {
             if (item.Contains(' '))
             {
-                var scopes = item.Split(' ').ToList();
+                List<string> scopes = item.Split(' ').ToList();
                 userScopes.AddRange(scopes);
             }
             else
@@ -48,12 +50,13 @@ public class DelimitedScopesAuthorizer : IScopesAuthorizer
             }
         }
 
-        var matchesScopes = routeAllowedScopes.Intersect(userScopes).ToList();
+        List<string> matchesScopes = routeAllowedScopes.Intersect(userScopes).ToList();
 
         if (matchesScopes.Count == 0)
         {
             return new ErrorResponse<bool>(
-                new ScopeNotAuthorizedError($"no one user scope: '{string.Join(",", userScopes)}' match with some allowed scope: '{string.Join(",", routeAllowedScopes)}'"));
+                new ScopeNotAuthorizedError(
+                    $"no one user scope: '{string.Join(",", userScopes)}' match with some allowed scope: '{string.Join(",", routeAllowedScopes)}'"));
         }
 
         return new OkResponse<bool>(true);

@@ -4,7 +4,9 @@
       "DownstreamPathTemplate": "/WeatherForecast",
       "DownstreamScheme": "https",
       "UpstreamPathTemplate": "/WeatherForecast",
-      "UpstreamHttpMethod": ["Get"],
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "ServiceName": "project-api",
       "LoadBalancerOptions": {
         "Type": "LeastConnection"
@@ -12,7 +14,9 @@
       "DangerousAcceptAnyServerCertificateValidator": true,
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Auth0",
-        "AllowedScopes": ["read:company"]
+        "AllowedScopes": [
+          "read:company"
+        ]
       }
     }
   ],
