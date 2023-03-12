@@ -1,13 +1,13 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/WeatherForecast",
+      "DownstreamPathTemplate": "/api/v1/Company",
       "DownstreamScheme": "https",
-      "UpstreamPathTemplate": "/WeatherForecast",
+      "UpstreamPathTemplate": "/api/v1/Company",
       "UpstreamHttpMethod": [
         "Get"
       ],
-      "ServiceName": "project-api",
+      "ServiceName": "company-api",
       "LoadBalancerOptions": {
         "Type": "LeastConnection"
       },
@@ -18,6 +18,177 @@
           "read:company"
         ]
       }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Company/{id}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/v1/Company/{id}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "ServiceName": "company-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Auth0",
+        "AllowedScopes": [
+          "read:company"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Company",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/v1/Company",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "ServiceName": "company-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Auth0",
+        "AllowedScopes": [
+          "write:company"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Company/{id}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/v1/Company/{id}",
+      "UpstreamHttpMethod": [
+        "Put"
+      ],
+      "ServiceName": "company-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Auth0",
+        "AllowedScopes": [
+          "update:company"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Company/{id}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/v1/Company/{id}",
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
+      "ServiceName": "company-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Auth0",
+        "AllowedScopes": [
+          "delete:company"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Tag",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/v1/Tag",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "ServiceName": "company-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Auth0",
+        "AllowedScopes": [
+          "read:company"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Tag",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/v1/Tag",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "ServiceName": "company-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Auth0",
+        "AllowedScopes": [
+          "write:company"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Tag",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/v1/Tag",
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
+      "ServiceName": "company-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Auth0",
+        "AllowedScopes": [
+          "delete:company"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Company/{id}/tag",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/v1/Company/{id}/tag",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "ServiceName": "company-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Auth0",
+        "AllowedScopes": [
+          "write:company"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Company/{id}/tag",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/v1/Company/{id}/tag",
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
+      "ServiceName": "company-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Auth0",
+        "AllowedScopes": [
+          "write:company"
+        ]
+      }
     }
   ],
   "GlobalConfiguration": {
@@ -25,7 +196,7 @@
     "ServiceDiscoveryProvider": {
       "Host": "localhost",
       "Port": 8500,
-      "Token": "05cf20c2-954d-e801-7297-de8129b1e998",
+      "Token": "3077112a-d5aa-e3d5-d4b7-6bba1334a6bf",
       "Type": "Consul"
     }
   }
