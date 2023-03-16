@@ -1,0 +1,11 @@
+﻿{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7068",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Token": "69d5d710-f4c4-2cce-b73c-876a1a99394c",
+      "Type": "Consul"
+    }
+  }
+}

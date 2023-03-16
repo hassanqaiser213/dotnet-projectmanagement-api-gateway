@@ -12,7 +12,10 @@ public class Program
     public static void Main(string[] args)
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-        builder.Configuration.AddJsonFile("ocelot.json");
+
+        builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+            .AddOcelot("Ocelot", builder.Environment)
+            .AddEnvironmentVariables();
 
         builder.Services.AddAuthentication(options =>
             {
@@ -28,9 +31,10 @@ public class Program
         builder.Services
             .AddOcelot()
             .AddConsul();
-
+        
         builder.Services.CustomizeOcelot();
-
+        builder.Services.AddEndpointsApiExplorer();
+        
         WebApplication app = builder.Build();
         app.UseAuthentication();
         app.UseOcelot().Wait();
