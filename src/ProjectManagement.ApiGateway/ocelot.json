@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/v1/Company",
+      "DownstreamPathTemplate": "/api/v2/Company",
       "UpstreamPathTemplate": "/api/v1/Company",
       "UpstreamHttpMethod": [
         "Get"

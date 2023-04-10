@@ -34,8 +34,14 @@ public class Program
         
         builder.Services.CustomizeOcelot();
         builder.Services.AddEndpointsApiExplorer();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", policy => { policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
+        });
         
         WebApplication app = builder.Build();
+        app.UseCors("AllowAll");
         app.UseAuthentication();
         app.UseOcelot().Wait();
 
